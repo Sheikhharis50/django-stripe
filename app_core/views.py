@@ -35,7 +35,6 @@ class CreateCheckoutSessionView(View):
     def post(self, request, subscription_id, **kwargs):
         try:
             subscription = self.get_subscription(subscription_id)
-            DOMAIN = "http://127.0.0.1:8000"
             checkout_session = stripe.checkout.Session.create(
                 api_key=settings.STRIPE_SECRET_KEY,
                 payment_method_types=["card"],
@@ -52,8 +51,8 @@ class CreateCheckoutSessionView(View):
                     },
                 ],
                 mode="payment",
-                success_url=f"{DOMAIN}/subscription/{subscription_id}/success",
-                cancel_url=f"{DOMAIN}/subscription/{subscription_id}/cancel",
+                success_url=f"{settings.ENDPOINT}/subscription/{subscription_id}/success",
+                cancel_url=f"{settings.ENDPOINT}/subscription/{subscription_id}/cancel",
             )
         except Exception as e:
             print(e)
