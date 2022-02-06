@@ -16,6 +16,8 @@ SECRET_KEY = env("SECRET_KEY")
 
 DEBUG = env("DEBUG")
 
+ENDPOINT = env("ENDPOINT")
+
 ALLOWED_HOSTS = ["*"]
 
 
