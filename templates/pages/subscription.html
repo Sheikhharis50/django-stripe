@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Subscription | Django Stripe
+{% endblock %}
+
+{% block content %}
+<div class="page-content">
+    <div class="page-heading">
+        <h3>Subscription</h3>
+        {% if user.is_authenticated %}
+        <p>Welcome, {{ user.get_full_name }}.</p>
+        {% else %}
+        <p>Welcome, Anonymous user. Please log in.</p>
+        {% endif %}
+    </div>
+    <hr>
+    <div class="page-body">
+        {% if subscription %}
+        <form class="form" action="{% url 'create-checkout-session' subscription.id  %}" method="post">
+            {% csrf_token %}
+            <div class="form-control">
+                <label for="subscription.name">Name</label>
+                <p id="subscription.name">{{ subscription.name }}</p>
+            </div>
+            <div class="form-control">
+                <label for="subscription.can_order">Can Order</label>
+                <p id="subscription.can_order">{{ subscription.can_order }}</p>
+            </div>
+            <div class="form-control">
+                <label for="subscription.price">Price</label>
+                <p id="subscription.price">${{ subscription.price }}</p>
+            </div>
+            <div class="form-control">
+                <label for="subscription.description">Description</label>
+                <p id="subscription.description">{{ subscription.description }}</p>
+            </div>
+            <button class="btn" type="submit">Subscribe</button>
+        </form>
+        {% else %}
+        <p> Not Found. </p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

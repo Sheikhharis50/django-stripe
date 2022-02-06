@@ -1,0 +1,33 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        {% block title %}
+        {% endblock %}
+    </title>
+    <link rel="icon"
+        href="https://b.stripecdn.com/site-srv/assets/img/v3/jobs_v2/thumbnails/stripe-6398a2d21ec3dcc6ee147a058b46de3624e50178e38541d0177b8cddeb845f87.jpg">
+    <link rel="stylesheet" href="{% static 'css/global.css' %}">
+    {% block stylesheet %}
+    {% endblock %}
+    <script src="https://polyfill.io/v3/polyfill.min.js?version=3.52.1&features=fetch"></script>
+    <script src="https://js.stripe.com/v3/"></script>
+    {% block script %}
+    {% endblock %}
+</head>
+
+<body>
+    <section class="page-section">
+        <h1><a href="/">Django Stripe</a></h1>
+        {% block content %}
+        {% endblock %}
+    </section>
+</body>
+
+</html>

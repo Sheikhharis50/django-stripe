@@ -6,7 +6,7 @@ class Subscription(models.Model):
     name = models.CharField(max_length=255)
     description = models.TextField(max_length=1000)
     can_order = models.IntegerField(default=10)
-    price = models.FloatField(default=0.0)
+    price = models.IntegerField(default=0)
 
     def __str__(self):
         return "{}".format(self.name)
