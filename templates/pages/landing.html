@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Django Stripe
+{% endblock %}
+
+{% block stylesheet %}
+<link rel="stylesheet" href="{% static 'css/pages/landing.css' %}">
+{% endblock %}
+
+
+{% block content %}
+<div class="page-content">
+    <div class="page-heading">
+        <h3>Subscriptions</h3>
+        {% if user.is_authenticated %}
+        <p>Welcome, {{ user.get_full_name }}.</p>
+        {% else %}
+        <p>Welcome, Anonymous user. Please log in.</p>
+        {% endif %}
+    </div>
+    <hr>
+    <div class="list">
+        {% for subscription in subscriptions %}
+        <div class="card" style="background-color: {{ subscription.color }};">
+            <div class="card-head">
+                <h2>{{ subscription.name }}</h2>
+            </div>
+            <div class="card-footer">
+                <a href="{% url 'subscription-view' subscription.id %}" class="btn">View</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

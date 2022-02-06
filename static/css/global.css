@@ -1,0 +1,107 @@
+:root {
+  --clr-success: #28a745;
+  --clr-danger: #dc3545;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100vh;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.page-section {
+  width: 100%;
+  max-width: 1440px;
+  padding: 1em;
+}
+
+.page-heading {
+  display: flex;
+  justify-content: space-between;
+}
+
+.btn {
+  display: block;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  background-color: gainsboro;
+  transition: 0.3s;
+  padding: 1em;
+  border-radius: 5px;
+  text-align: center;
+  width: 100%;
+}
+
+.btn:hover {
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+a.btn {
+  text-decoration: none;
+  color: black;
+}
+
+.list {
+  gap: 1em;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+  padding: 1em;
+  max-width: 15.2em;
+  background-color: #313552;
+  color: #eee6ce;
+  flex: 33.33%;
+}
+
+.card .card-head {
+  height: 16vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card .card-footer {
+  display: flex;
+  justify-content: center;
+  border-top: 1px solid white;
+  padding-block: 1em;
+}
+
+.card .card-footer .btn {
+  width: 50%;
+}
+
+.form .form-control label {
+  font-weight: bold;
+}
+
+.form .form-control p {
+  border: 1px solid;
+  box-shadow: 1px 1px darkgreen;
+  padding: 5px;
+}
+
+.text-success {
+  color: var(--clr-success);
+}
+
+.text-danger {
+  color: var(--clr-danger);
+}
+
+.bg-success {
+  background-color: var(--clr-success);
+}
+
+.bg-danger {
+  background-color: var(--clr-danger);
+}
