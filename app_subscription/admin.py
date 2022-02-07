@@ -25,4 +25,5 @@ class UserSubscriptionAdmin(admin.ModelAdmin):
         "user",
         "subscription",
         "ordered",
+        "payment_status",
     )

@@ -1,12 +1,15 @@
 from django.shortcuts import redirect
 from django.views import View
 from django.views.generic import TemplateView
+from django.views.decorators.csrf import csrf_exempt
+from django.utils.decorators import method_decorator
 from django.conf import settings
 from http import HTTPStatus
 import random
 import stripe
 
 from app_core.response import Response
+from app_core.handlers import StripeEventHandler
 from app_subscription.models import Subscription
 
 
@@ -50,6 +53,10 @@ class CreateCheckoutSessionView(View):
                         "quantity": 1,
                     },
                 ],
+                metadata={
+                    "subscription_id": subscription_id,
+                    "user_id": request.user.id,
+                },
                 mode="payment",
                 success_url=f"{settings.ENDPOINT}/subscription/{subscription_id}/success",
                 cancel_url=f"{settings.ENDPOINT}/subscription/{subscription_id}/cancel",
@@ -58,3 +65,18 @@ class CreateCheckoutSessionView(View):
             print(e)
             return Response(status=HTTPStatus.FORBIDDEN)
         return redirect(checkout_session.url, code=303)
+
+
+@method_decorator(csrf_exempt, name="dispatch")
+class StripeWebhookView(View):
+    def post(self, request):
+        payload = request.body
+        signature = request.META["HTTP_STRIPE_SIGNATURE"]
+        handler = StripeEventHandler(payload, signature)
+
+        handler.create_event()
+
+        # Handle the checkout.session.completed event
+        handler.execute_event()
+
+        return Response()
