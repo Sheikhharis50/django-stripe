@@ -1,0 +1,6 @@
+# run stripe cli to listen
+stripe listen --forward-to localhost:8000/webhooks/stripe/
+
+# some links before going to production.
+https://stripe.com/docs/payments/checkout/fulfill-orders
+https://stripe.com/docs/checkout/quickstart
