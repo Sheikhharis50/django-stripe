@@ -1,6 +1,8 @@
 from django.db import models
 from django.conf import settings
 
+from utils.enums import PaymentStatus
+
 
 class Subscription(models.Model):
     name = models.CharField(max_length=255)
@@ -22,6 +24,12 @@ class UserSubscription(models.Model):
         on_delete=models.CASCADE,
     )
     ordered = models.IntegerField(default=0)
+    transaction_data = models.JSONField(blank=True, null=True, default=dict)
+    payment_status = models.CharField(
+        max_length=100,
+        choices=PaymentStatus.choices,
+        default=PaymentStatus.PENDING,
+    )
 
     def __str__(self):
         return "{} has subscribed with {}".format(

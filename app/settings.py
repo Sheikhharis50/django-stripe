@@ -1,5 +1,6 @@
 import environ
 import os
+import stripe
 
 from pathlib import Path
 
@@ -108,3 +109,5 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 STRIPE_PUBLIC_KEY = env("STRIPE_PUBLIC_KEY")
 STRIPE_SECRET_KEY = env("STRIPE_SECRET_KEY")
 STRIPE_WEBHOOK_KEY = env("STRIPE_WEBHOOK_KEY")
+# attach the STRIPE_SECRET_KEY
+stripe.api_key = STRIPE_SECRET_KEY
